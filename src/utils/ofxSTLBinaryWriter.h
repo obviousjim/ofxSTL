@@ -25,8 +25,7 @@
 class ofxSTLBinaryWriter: public ofxSTLWriterBase{
 public:
 	void writeFile(string fileName, const vector<ofxSTLFacet>& facets){
-		string path = "data/" + fileName; //ofToDataPath(fileName, true);
-		std::fstream myFile(path.c_str(), std::ios::out | std::ios::binary);
+		std::fstream myFile(fileName.c_str(), std::ios::out | std::ios::binary);
 		writeHeader(myFile);
 		unsigned int numFacets = (unsigned int)facets.size();
 		writeObject(myFile, numFacets);

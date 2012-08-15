@@ -41,9 +41,8 @@ public:
 			modelInfo += "endfacet\n";
 		}
 		modelInfo += "end solid " + modelName;
-		string path = "data/" + fileName;//ofToDataPath(fileName, false);
 		std::ofstream myFile;
-		myFile.open(path.c_str());
+		myFile.open(fileName.c_str());
 		myFile << modelInfo.c_str();
 		myFile.close();		
 	}

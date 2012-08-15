@@ -16,7 +16,7 @@ void testApp::setup(){
 	bSaveModel = false;
 	
 	//some random model created with ofxMarchingCubes... :)
-	stlImporter.loadSTL("testASCII.stl");
+	stlImporter.loadSTL(ofToDataPath("testASCII.stl"));
 	//stlImporter.loadSTL("testBin.stl");
 }
 
@@ -31,9 +31,9 @@ void testApp::update(){
 			stlExporter.addTriangle(facets[i].vert1, facets[i].vert2, facets[i].vert3, facets[i].normal);
 		}
 		stlExporter.useASCIIFormat(true); //export as ASCII (default is binary)
-		stlExporter.saveModel("testASCII.stl");
+		stlExporter.saveModel(ofToDataPath("testASCII.stl"));
 		stlExporter.useASCIIFormat(false); //export as binary
-		stlExporter.saveModel("testBin.stl");
+		stlExporter.saveModel(ofToDataPath("testBin.stl"));
 	}
 }
 

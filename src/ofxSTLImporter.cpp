@@ -30,7 +30,6 @@ ofxSTLImporter::~ofxSTLImporter(){
 
 void ofxSTLImporter::loadSTL(string path){
 	ifstream myFile;
-	path = "data/" + path;//ofToDataPath(path, true);
 	myFile.open(path.c_str(), ios::in);
 	if(!myFile.is_open()){
 		ofLog(OF_LOG_ERROR, "ofxSTLImporter::loadSTL - could not open file");
