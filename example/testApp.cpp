@@ -2,22 +2,26 @@
 
 //--------------------------------------------------------------
 void testApp::setup(){
-	ofBackground(250,250,250);
+    
+	ofBackgroundHex(0x222222);
 	ofSetVerticalSync(true);
-	glEnable(GL_DEPTH_TEST);
-	light.pointLight(0, 0, 255, 0, 0, 500);
-	reflections.directionalLight(100, 100, 100, 0, -1, 0);
-	reflections.specular(200, 200, 200);
-	ofxMaterialSpecular(250, 250, 250);
-	ofxMaterialShininess(30);
-	ofxSetSmoothLight(true);
-	
+
+    glEnable(GL_DEPTH_TEST);
+   
+    light.enable();
+    
+    // Move off default colors
+    light.setDiffuseColor(ofColor::fromHsb(180, 70, 75));
+    light.setAmbientColor(ofColor::fromHsb(180, 150, 200));
+    
 	ofSetLogLevel(OF_LOG_VERBOSE);
-	bSaveModel = false;
-	
-	//some random model created with ofxMarchingCubes... :)
-	stlImporter.loadSTL(ofToDataPath("testASCII.stl"));
+	bSaveModel = false;	
+
+	stlImporter.loadSTL(ofToDataPath("OF_logo.stl"));
 	//stlImporter.loadSTL("testBin.stl");
+    
+    drawMode = facets;
+
 }
 
 //--------------------------------------------------------------
@@ -39,16 +43,39 @@ void testApp::update(){
 
 //--------------------------------------------------------------
 void testApp::draw(){
-	ofxLightsOn();
-	ofPoint center(ofGetWidth()*0.5f, ofGetHeight()*0.5f, -1000);
-	float counter = (float)ofGetFrameNum();
-	glPushMatrix();
-	glTranslatef(center.x, center.y, center.z);
-	glRotatef(counter*0.05f, 1.0f, 0.0f, 0.0f);
-	glRotatef(counter*0.1f, 0.0f, 1.0f, 0.0f);
-	stlImporter.draw();
-	glPopMatrix();
-	
+ 
+    camera.begin();
+    
+        // Enlarge our model
+        stlImporter.rescaleModel(600);
+
+        ofRotateY(-35); // beauty angle
+    
+        if(drawMode == normals) {
+            stlImporter.drawNormals();
+        }
+        else if(drawMode == wire) {
+             stlImporter.drawWireFrame();
+        }
+        else if(drawMode == facets) {
+             stlImporter.drawFacets();
+        }
+   
+    camera.end();
+    
+    //
+    
+    ofSetHexColor(0xe0d6ff);
+
+    stringstream showKey;
+    
+    showKey << "Draw Options \n\n"
+    << "1: Draw Normals \n"
+    << "2: Draw WireFrame \n"
+    << "3: Draw Facets";
+    
+    ofDrawBitmapString(showKey.str(), 20,20);
+
 }
 
 //--------------------------------------------------------------
@@ -58,7 +85,33 @@ void testApp::keyPressed(int key){
 
 //--------------------------------------------------------------
 void testApp::keyReleased(int key){
-	if(key == ' ')bSaveModel = true;
+    
+    switch (key) {
+            
+        case ' ':
+            bSaveModel = true;
+            break;
+            
+        case '1':
+            drawMode = normals;
+            break;
+            
+        case '2':
+            drawMode = wire;
+            break;
+            
+        case '3':
+            drawMode = facets;
+            break;
+            
+        case 'f':
+            ofToggleFullscreen();
+            break;
+            
+        default:
+            break;
+    }
+    
 }
 
 //--------------------------------------------------------------
