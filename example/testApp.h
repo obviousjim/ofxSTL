@@ -3,10 +3,13 @@
 
 
 #include "ofMain.h"
-#include "ofx3DUtils.h"
 #include "ofxSTL.h"
 
-#define NUM_META_BALLS 10
+enum drawOptions {
+    normals,
+    wire,
+    facets    
+};
 
 class testApp : public ofBaseApp{
 	
@@ -25,8 +28,14 @@ public:
 	
 	ofxSTLImporter stlImporter;
 	ofxSTLExporter stlExporter;
-	ofxLight light, reflections;
-	bool bSaveModel;
+
+	bool           bSaveModel;
+    
+    ofLight        light;
+    ofEasyCam      camera;
+    
+    drawOptions    drawMode;
+    
 };
 
 #endif
