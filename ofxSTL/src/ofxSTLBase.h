@@ -88,7 +88,6 @@ public:
 	
 	void normalizeModel(){
 		ofPoint minPt, maxPt;
-		int width, height;
 		int numFacets = facets.size();
 		for(int i=0; i<numFacets; i++){
 			ofxSTLFacet& f = facets[i];
