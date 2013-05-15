@@ -21,6 +21,7 @@
 #pragma once
 
 #include "ofxSTLReaderBase.h"
+#include "assert.h"
 
 class ofxSTLASCIIReader: public ofxSTLReaderBase{
 public:
