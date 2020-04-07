@@ -1,7 +1,7 @@
-#include "testApp.h"
+#include "ofApp.h"
 
 //--------------------------------------------------------------
-void testApp::setup(){
+void ofApp::setup(){
     
 	ofBackgroundHex(0x222222);
 	ofSetVerticalSync(true);
@@ -25,11 +25,11 @@ void testApp::setup(){
 }
 
 //--------------------------------------------------------------
-void testApp::update(){
+void ofApp::update(){
 	if(bSaveModel){
 		bSaveModel = false;
 		vector<ofxSTLFacet>& facets = stlImporter.getFacets();
-		int numFacets = facets.size();
+		std::size_t numFacets = facets.size();
 		stlExporter.beginModel("some model");
 		for(int i=0; i<numFacets; i++){
 			stlExporter.addTriangle(facets[i].vert1, facets[i].vert2, facets[i].vert3, facets[i].normal);
@@ -42,14 +42,14 @@ void testApp::update(){
 }
 
 //--------------------------------------------------------------
-void testApp::draw(){
+void ofApp::draw(){
  
     camera.begin();
     
         // Enlarge our model
         stlImporter.rescaleModel(600);
 
-        ofRotateY(-35); // beauty angle
+        ofRotateYDeg(-35); // beauty angle
     
         if(drawMode == normals) {
             stlImporter.drawNormals();
@@ -79,12 +79,12 @@ void testApp::draw(){
 }
 
 //--------------------------------------------------------------
-void testApp::keyPressed(int key){
+void ofApp::keyPressed(int key){
 
 }
 
 //--------------------------------------------------------------
-void testApp::keyReleased(int key){
+void ofApp::keyReleased(int key){
     
     switch (key) {
             
@@ -115,27 +115,27 @@ void testApp::keyReleased(int key){
 }
 
 //--------------------------------------------------------------
-void testApp::mouseMoved(int x, int y ){
+void ofApp::mouseMoved(int x, int y ){
 
 }
 
 //--------------------------------------------------------------
-void testApp::mouseDragged(int x, int y, int button){
+void ofApp::mouseDragged(int x, int y, int button){
 
 }
 
 //--------------------------------------------------------------
-void testApp::mousePressed(int x, int y, int button){
+void ofApp::mousePressed(int x, int y, int button){
 
 }
 
 //--------------------------------------------------------------
-void testApp::mouseReleased(int x, int y, int button){
+void ofApp::mouseReleased(int x, int y, int button){
 
 }
 
 //--------------------------------------------------------------
-void testApp::windowResized(int w, int h){
+void ofApp::windowResized(int w, int h){
 
 }
 
